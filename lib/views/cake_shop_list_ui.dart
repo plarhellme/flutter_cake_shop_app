@@ -1,8 +1,9 @@
-// ignore_for_file: sort_child_properties_last, prefer_interpolation_to_compose_strings
+// ignore_for_file: unused_element, sort_child_properties_last, prefer_interpolation_to_compose_strings
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_cake_shop_app/models/shopdb_ui.dart';
+import 'package:flutter_cake_shop_app/views/cake_shop_detail_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CakeShopListUi extends StatefulWidget {
@@ -180,12 +181,19 @@ class _CakeShopListUiState extends State<CakeShopListUi> {
               child: ListView.separated(
                 itemCount: cakeShops.length,
                 separatorBuilder: (context, index) => Divider(
-                  color: Colors.red[200],
+                  color: Colors.redAccent,
                 ),
                 itemBuilder: (context, index) {
                   return ListTile(
                     onTap: (){
-                      _makePhoneCall(cakeShops[index].phone!);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CakeShopDetailUi(
+                            cakeShop: cakeShops[index],
+                          ),
+                        ),
+                      );
                     },
                     leading: Image.asset(
                       'assets/images/' + cakeShops[index].image1!,
@@ -198,7 +206,7 @@ class _CakeShopListUiState extends State<CakeShopListUi> {
                     ),
                     trailing: Icon(
                       Icons.info,
-                      color: Colors.red,
+                      color: Colors.redAccent,
                     ),
                   );
                 },
